@@ -2,57 +2,62 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 import './App.css';
 
-const list = [
-  {
-    title: "React",
-    url: "https://facebook.github.io/react/",
-    author: "Jordan Walke",
-    num_comments: 3,
-    points: 4,
-    objectID: 0,
-  },
-  {
-    title: "Redux",
-    url: "https://github.com/reactjs/redux",
-    author: "Dan Abramov, Andrew Clark",
-    num_comments: 2,
-    points: 5,
-    objectID: 1,
-  }
-]
 
 class App extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
-      list: list,
+      number: 0
+    }
+  }
+  // eventHandler (event) {
+  //   console.log(this, event)
+  // }
+
+  // render () {
+  //   return (
+  //     <div>
+  //       <button onClick={this.eventHandler.bind(this)}>Clik Me</button>
+  //     </div>
+  //   )
+  // }
+  clickButton = (event) => {
+    setInterval(() => {
+      this.setState(
+        {number: this.state.number + 1}
+      )
+    }, 1000)
+  }
+
+  background = (num) => {
+    if(num % 3 === 0 && num % 5 === 0) {
+      return 'card bg-warning text-dark'
+    }else if (num % 5 === 0) {
+      return 'card bg-success text-white'
+    }else if (num % 3 === 0) {
+      return 'card bg-light text-dark'
+    }else {
+      return 'card bg-dark text-white'
     }
   }
 
-  render() {
-    function hello (name) {
-      return name.first + " " + name.last;
-    };
-    const name = {first: "Ilham", last: "Bakhti"};
-    
+  render () {
     return (
-      <div className="App">
-        <h2>Hello, {hello(name)}</h2>
-
-        {list.map((item) => <div>{item.title}</div>)}
-        {this.state.list.map(item =>
-          <div key={item.objectID}>
-            <span>
-              <a href={item.url}>{item.title}</a>
-            </span>
-            <span>{item.author}</span>
-            <span>{item.num_comments}</span>
-            <span>{item.points}</span>
-          </div>)
-        }
+      <div className="container">
+        <div className="row">
+          <div className="col-md-4">
+          <div className={this.background(this.state.number)}>
+            <div className="card-header d-flex justify-content-center mb-5" style={{fontSize: 90}}>{this.state.number}</div>
+            <div className="card-body">
+              <button className="card-title btn btn-primary" onClick={this.clickButton}>Click Me</button>
+            </div>
+          </div>
+          {/* <button className="btn btn-primary">Clik Me!</button> */}
+          </div>
+        </div>
       </div>
-    );
+    )
+    
   }
 }
-
 export default App;
