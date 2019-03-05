@@ -26,7 +26,7 @@ class App extends Component {
       this.setState(
         {number: this.state.number + 1}
       )
-    }, 1000)
+    }, 1000);
   }
 
   background = (num) => {
@@ -49,7 +49,7 @@ class App extends Component {
           <div className={this.background(this.state.number)}>
             <div className="card-header d-flex justify-content-center mb-5" style={{fontSize: 90}}>{this.state.number}</div>
             <div className="card-body">
-              <button className="card-title btn btn-primary" onClick={this.clickButton}>Click Me</button>
+              <button className="card-title btn btn-primary" onClick={this.clickButton} disabled={this.state.number > 0 ? true : false}>Click Me</button>
             </div>
           </div>
           {/* <button className="btn btn-primary">Clik Me!</button> */}
