@@ -1,63 +1,46 @@
-import React, { Component } from 'react';
-// import logo from './logo.svg';
+import React from 'react';
+
+
 import './App.css';
+import Timer from './components/timer'
+import Case from './components/case'
 
-
-class App extends Component {
+class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      number: 0
+      counter: 0
     }
   }
-  // eventHandler (event) {
-  //   console.log(this, event)
-  // }
 
-  // render () {
-  //   return (
-  //     <div>
-  //       <button onClick={this.eventHandler.bind(this)}>Clik Me</button>
-  //     </div>
-  //   )
-  // }
   clickButton = (event) => {
-    setInterval(() => {
+    this.setTimer = setInterval(() => {
       this.setState(
-        {number: this.state.number + 1}
+        {counter: this.state.counter + 1}
       )
     }, 1000);
   }
 
-  background = (num) => {
-    if(num % 3 === 0 && num % 5 === 0) {
-      return 'card bg-warning text-dark'
-    }else if (num % 5 === 0) {
-      return 'card bg-success text-white'
-    }else if (num % 3 === 0) {
-      return 'card bg-light text-dark'
-    }else {
-      return 'card bg-dark text-white'
-    }
+  clearButton = (event) => {
+    console.log('clear')
+    clearInterval(this.setTimer)
   }
 
   render () {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-4">
-          <div className={this.background(this.state.number)}>
-            <div className="card-header d-flex justify-content-center mb-5" style={{fontSize: 90}}>{this.state.number}</div>
-            <div className="card-body">
-              <button className="card-title btn btn-primary" onClick={this.clickButton} disabled={this.state.number > 0 ? true : false}>Click Me</button>
-            </div>
-          </div>
-          {/* <button className="btn btn-primary">Clik Me!</button> */}
-          </div>
-        </div>
+      <div className="container mt-5">
+        <div className="row justify-content-center">
+          <Timer 
+            clickButton={this.clickButton} 
+            counter={this.state.counter} 
+            clear={this.clearButton}/>
+          <Case/>
+        </div>  
       </div>
     )
-    
   }
+
 }
+
+
 export default App;
